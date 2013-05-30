@@ -175,10 +175,10 @@ public abstract class NanoHTTPD {
 			try{
 				//TODO
 				
-			}catch (IOException | InterruptedException ie){
-				Response.error(outputStream, Response.Status.INTERNAL_ERROR,"SERVER INTERNAL ERROR : IOException" + ie.getMessage());
+			}catch (Exception ie){
+				//Response.error(outputStream, Response.Status.INTERNAL_ERROR,"SERVER INTERNAL ERROR : IOException" + ie.getMessage());
 				
-				throw new InterruptedException();
+				//throw new InterruptedException();
 			} finally{
 				tempFileManager.clear();
 			}
@@ -189,10 +189,10 @@ public abstract class NanoHTTPD {
 	public static class Response{
 		
 		//some common HTTP Status Codes
-		public enum Status {
-			OK(200,"OK"),CREATED(201,"CREATED"),
-		}
-		private Status status;
+		/**public enum Status {
+			OK(200,"OK"),CREATED(201,"CREATED"),INTERNAL_ERROR(201,"INTERNAL_ERROR");
+		}**/
+		//private Status status;
 		
 	}
 	/***********************************************/
