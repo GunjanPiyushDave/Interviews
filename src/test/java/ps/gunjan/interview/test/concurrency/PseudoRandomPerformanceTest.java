@@ -6,6 +6,7 @@ import java.util.concurrent.CyclicBarrier;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
+import ps.gunjan.interview.concurrency.AtomicPseudoRandom;
 import ps.gunjan.interview.concurrency.ReentrantLockPseudoRandom;
 
 public class PseudoRandomPerformanceTest {
@@ -15,12 +16,13 @@ public class PseudoRandomPerformanceTest {
 	@Test
 	public void testAtomicIntegerVsReentrantLockBasedPRNGs() throws InterruptedException, BrokenBarrierException {
 		
-		int numThreadsStartValue = 2;
+		int numThreadsStartValue = 4;
 		int numVariations = 10;
 		
 		final int upperBound = 10000;
 		
 		final ReentrantLockPseudoRandom reentrantLockPseudoRandom = new ReentrantLockPseudoRandom(17);
+		final AtomicPseudoRandom atomicPseudoRandom = new AtomicPseudoRandom(17);
 		
 		long[] reentrantLockComputeTimes = new long[numVariations];
 		
@@ -59,7 +61,7 @@ public class PseudoRandomPerformanceTest {
 		StringBuilder builder = new StringBuilder();
 		
 		for(int i=0; i < computeTimes.length; i++){
-			builder.append(((i+1)*numThreadsStartValue)+" threads "+ computeTimes[i]+ " ns \n");
+			builder.append(((i+1)*numThreadsStartValue)+" threads "+ Thread.currentThread().getName()+"  "+ computeTimes[i]+ " ns \n");
 		}
 		return builder.toString();
 		
